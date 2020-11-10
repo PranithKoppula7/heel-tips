@@ -9,6 +9,9 @@ app.get('/', (req, res) => {
     res.send('we are home');
 });
 
+
+app.use(express.json());
+
 mongoose.connect(process.env.DB_CONNECTION, 
 { useNewUrlParser: true, useUnifiedTopology: true }, () => {
     console.log('connected to db')
@@ -17,4 +20,4 @@ mongoose.connect(process.env.DB_CONNECTION,
 
 app.listen(3000);
 
-app.use('/api/users', authRoute);
+app.use('/api/user', authRoute);
