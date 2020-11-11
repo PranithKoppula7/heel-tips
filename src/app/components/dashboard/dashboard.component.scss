@@ -1,0 +1,35 @@
+mat-toolbar {
+    background: #4b9cd3;
+    color: white;
+    justify-content: space-between;
+}
+
+span {
+    margin-right: 1rem;
+}
+
+div.container {
+    justify-content: space-evenly;
+}
+.container {
+    padding: 5% 5% 10% 5%;
+    
+
+    // mat-card {
+    //     display: inline;
+    // }
+
+    .welcome-card {
+        height: 50%;
+        align-self: center;
+    }
+}
+
+.post-card {
+    margin-bottom: 5px;
+}
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }

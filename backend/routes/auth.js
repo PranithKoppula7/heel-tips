@@ -19,10 +19,33 @@ router.post('/register', async (req, res) => {
     });
 
     user.save().then(data => {
-        res.json({message: 'Success', user: data});
+        res.json({success: true, user: data});
     }).catch(err => {
-        res.json({message: err, user: null});
+        res.json({success: false, user: null});
     });
 });
+
+router.post('/login', async (req, res) => {
+
+    // check if email exists
+    const user = await User.findOne({email: req.body.email});
+    if(!user) return res.status(400).send({success: false, message:'Email does not exist'});
+
+    // password
+    const validPass = await bcrypt.compare(req.body.password, user.password);
+    if(!validPass) return res.status(400).send({success: false, message: 'Invalid Password'});
+
+    req.session.user = user;
+
+    res.send({success: true, user: user}).status(200);
+
+
+});
+
+router.get('/logout', (req, res) => {
+    delete req.session.user;
+    res.send('Logged out');
+});
+
 
 module.exports = router;

@@ -10,18 +10,18 @@
         <mat-toolbar color="primary">Register</mat-toolbar>
         <form fxLayoutAlign="stretch" fxLayout="column" class="form">
             <mat-form-field>
-                <input matInput placeholder="Name" required>
+                <input matInput placeholder="Name" [(ngModel)]='user.name' required name="name">
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Email" required>
+                <input matInput placeholder="Email" [(ngModel)]='user.email' required name="email">
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Password" type="password" required>
+                <input matInput placeholder="Password" [(ngModel)]='user.password' type="password" required name="password">
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="PID" required>
+                <input matInput placeholder="PID" [(ngModel)]='user.pid' required name="pid">
             </mat-form-field>
-            <button mat-raised-button type="submit">Register</button>
+            <button mat-raised-button type="submit" (click)="register()">Register</button>
         </form>
     </mat-card>
 </div>
