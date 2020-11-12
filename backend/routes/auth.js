@@ -42,10 +42,23 @@ router.post('/login', async (req, res) => {
 
 });
 
+router.get('/logged-in', (req, res) => {
+    console.log(req.session.user);
+    if(req.session.user) {
+        res.send(true);
+    }
+    res.send(false);
+})
+
 router.get('/logout', (req, res) => {
     delete req.session.user;
     res.send('Logged out');
 });
+
+router.get('/', async (req, res) => {
+    const users = await User.find();
+    res.send(users);
+})
 
 
 module.exports = router;

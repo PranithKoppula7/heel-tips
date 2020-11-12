@@ -5,6 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ClassesComponent } from './components/classes/classes.component';
+import { AuthGuard } from './auth.guard';
 
 
 const routes: Routes = [
@@ -19,10 +20,12 @@ const routes: Routes = [
     component: RegisterComponent
   }, {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
   }, {
     path: 'classes',
-    component: ClassesComponent
+    component: ClassesComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
