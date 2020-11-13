@@ -1,0 +1,22 @@
+.container {
+    margin: 2% 10% 2% 10%;
+}
+
+mat-card {
+    font-size: 20px;
+    text-align: center;
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    &:hover {
+        cursor: pointer;
+        background: darken($color: white, $amount: 2%);
+    }
+}
+
+mat-card-title {
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}

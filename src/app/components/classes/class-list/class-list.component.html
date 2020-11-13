@@ -1,0 +1,4 @@
+<div class="container">
+    <mat-card-title>{{dept}}</mat-card-title>
+    <mat-card *ngFor="let class of classes" (click)="goToPosts(class)">{{class}}</mat-card>
+</div>
