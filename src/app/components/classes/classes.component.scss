@@ -1,9 +1,22 @@
-mat-toolbar {
-    background: #4b9cd3;
-    color: white;
-    justify-content: space-between;
+.container {
+    margin: 2% 10% 2% 10%;
 }
 
-span {
-    margin-right: 1rem;
+mat-card {
+    // margin-bottom: 10px;
+    font-size: 20px;
+    text-align: center;
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    &:hover {
+        cursor: pointer;
+        background: darken($color: white, $amount: 2%);
+    }
+}
+
+mat-card-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
 }

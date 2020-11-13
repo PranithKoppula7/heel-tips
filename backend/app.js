@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv/config')
 const authRoute = require('./routes/auth');
+const postRoute = require('./routes/posts');
 const session = require('express-session');
 const cors = require('cors');
 const app = express();
@@ -32,3 +33,4 @@ mongoose.connect(process.env.DB_CONNECTION,
 app.listen(3000);
 
 app.use('/api/user', authRoute);
+app.use('/api/post', postRoute);

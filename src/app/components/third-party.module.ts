@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
@@ -14,6 +15,8 @@ import {MatChipsModule} from '@angular/material/chips';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ClassListComponent } from './classes/class-list/class-list.component';
+import { ClassPostsComponent } from './class-posts/class-posts.component';
 
 
 @NgModule({
@@ -27,7 +30,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
         MatFormFieldModule,
         MatInputModule,
         MatChipsModule,
-        RouterModule
+        RouterModule,
+        BrowserModule
     ],
     exports: [
         MatToolbarModule,
@@ -39,9 +43,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
         MatFormFieldModule,
         MatInputModule,
         MatChipsModule,
-        RouterModule
+        RouterModule,
+        BrowserModule
     ],
-    declarations: [LoginComponent, RegisterComponent, DashboardComponent]
+    declarations: [LoginComponent, RegisterComponent, DashboardComponent, ClassListComponent, ClassPostsComponent]
 })
 
 export class ThirdPartyModule{}

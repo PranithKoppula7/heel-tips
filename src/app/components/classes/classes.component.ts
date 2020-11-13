@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PostService } from 'src/app/shared/post.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-classes',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClassesComponent implements OnInit {
 
-  constructor() { }
+  deparments: String[];
+
+
+  constructor(private postService: PostService, private router: Router) { }
 
   ngOnInit(): void {
+    this.postService.getDepartments().subscribe((res: Array<String>) => {
+      this.deparments = res;
+      
+      this.deparments = this.deparments.map((department) => department.toUpperCase());
+
+    });
   }
+
+
+  goClass(department) {
+    // this.router.navigate(['class-list'], { queryParams: {dept: department}})
+    department = department.toLowerCase();
+    this.router.navigate(['classes/class-list'], { queryParams: {dept: department}});
+  }
+
 
 }

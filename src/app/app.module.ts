@@ -9,18 +9,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ThirdPartyModule } from './components/third-party.module';
 import { ClassesComponent } from './components/classes/classes.component';
 
+import { MainLayoutComponent } from './layouts/main-layout.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
     ClassesComponent,
+    MainLayoutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ThirdPartyModule,
-    HttpClientModule
+    HttpClientModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
