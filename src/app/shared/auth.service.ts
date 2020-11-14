@@ -19,20 +19,18 @@ export class AuthService {
   login(user) {
     return this.http.post(baseUrl + '/user/login', user, { withCredentials: true}).subscribe((res: any) => {
       if(res.success) {
-        localStorage.setItem('loggedIn', 'true');
         this.router.navigate(['/dashboard']);
       }
     });
   }
 
-  loggedIn(): boolean {
-    return localStorage.getItem('loggedIn') === 'true';
+  loggedIn() {
+    return this.http.get<boolean>(baseUrl + '/user/logged-in', { withCredentials: true});
   }
 
   logout() {
     this.http.get(baseUrl + '/user/logout').subscribe((res: any) => {
       if(res.success) {
-        localStorage.removeItem('loggedIn');
         this.router.navigate(['/'])
       }
     });

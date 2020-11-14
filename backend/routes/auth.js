@@ -43,11 +43,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/logged-in', (req, res) => {
-    console.log(req.session.user);
-    if(req.session.user) {
-        res.send(true);
-    }
-    res.send(false);
+    req.session.user ? res.status(200).send(true) : res.send(false);
 })
 
 router.get('/logout', (req, res) => {

@@ -10,7 +10,6 @@ import { ClassListComponent } from './components/classes/class-list/class-list.c
 import { MainLayoutComponent } from './layouts/main-layout.component';
 import { ClassPostsComponent } from './components/class-posts/class-posts.component';
 import { CreateTipComponent } from './components/create-tip/create-tip.component';
-import { PostService } from './shared/post.service';
 
 
 const routes: Routes = [
