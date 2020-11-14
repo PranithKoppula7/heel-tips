@@ -52,7 +52,7 @@ router.get('/logged-in', (req, res) => {
 
 router.get('/logout', (req, res) => {
     delete req.session.user;
-    res.send('Logged out');
+    res.send({success: true, message: "Logged out!"});
 });
 
 router.get('/', async (req, res) => {

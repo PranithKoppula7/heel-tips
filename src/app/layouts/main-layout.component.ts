@@ -12,11 +12,12 @@ import { Router } from '@angular/router';
             <a href="classes" mat-button>Classes</a>
             <button mat-button>Profile</button>
             <button mat-button (click)="logout()">Logout</button>
+            <a class="create-button" href="create-tip" mat-raised-button>Create Tip!</a>
         </div>
     </mat-toolbar>
     <router-outlet></router-outlet>
   `,
-  styles: [' mat-toolbar { background: #4b9cd3; color: white; justify-content: space-between; } span { margin-right: 1rem; }']
+  styles: [' mat-toolbar { background: #4b9cd3; color: white; justify-content: space-between; } span { margin-right: 1rem; } .create-button { background-color: #13294b; color: white; }']
 })
 export class MainLayoutComponent {
     constructor(private authService: AuthService, private router: Router) {}

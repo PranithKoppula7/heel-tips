@@ -9,32 +9,32 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private router: Router) { }
 
-  logged: boolean = false;
+  constructor(private http: HttpClient, private router: Router) { }
 
   register(user) {
     return this.http.post(baseUrl + '/user/register', user);
   }
 
   login(user) {
-    return this.http.post(baseUrl + '/user/login', user);
+    return this.http.post(baseUrl + '/user/login', user, { withCredentials: true}).subscribe((res: any) => {
+      if(res.success) {
+        localStorage.setItem('loggedIn', 'true');
+        this.router.navigate(['/dashboard']);
+      }
+    });
   }
 
   loggedIn(): boolean {
-    // this.http.get(baseUrl + '/user/logged-in').subscribe((res: boolean) => {
-    //   this.logged =  res;
-    //   // return res;
-    //   // console.log(res);
-    // });
-    // console.log(this.logged);
-    // return this.logged;
-    return (localStorage.getItem('loggedIn') === 'true');
+    return localStorage.getItem('loggedIn') === 'true';
   }
 
   logout() {
-    // this.http.get(baseUrl + '/user/logout');
-    localStorage.removeItem('loggedIn');
-    this.router.navigate(['/']);
+    this.http.get(baseUrl + '/user/logout').subscribe((res: any) => {
+      if(res.success) {
+        localStorage.removeItem('loggedIn');
+        this.router.navigate(['/'])
+      }
+    });
   }
 }

@@ -10,6 +10,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 import { LoginComponent } from './login/login.component';
@@ -17,6 +18,8 @@ import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ClassListComponent } from './classes/class-list/class-list.component';
 import { ClassPostsComponent } from './class-posts/class-posts.component';
+import { AuthService } from '../shared/auth.service';
+import { CreateTipComponent } from './create-tip/create-tip.component';
 
 
 @NgModule({
@@ -31,7 +34,8 @@ import { ClassPostsComponent } from './class-posts/class-posts.component';
         MatInputModule,
         MatChipsModule,
         RouterModule,
-        BrowserModule
+        BrowserModule,
+        MatAutocompleteModule
     ],
     exports: [
         MatToolbarModule,
@@ -44,9 +48,11 @@ import { ClassPostsComponent } from './class-posts/class-posts.component';
         MatInputModule,
         MatChipsModule,
         RouterModule,
-        BrowserModule
+        BrowserModule,
+        MatAutocompleteModule
     ],
-    declarations: [LoginComponent, RegisterComponent, DashboardComponent, ClassListComponent, ClassPostsComponent]
+    providers: [AuthService],
+    declarations: [LoginComponent, RegisterComponent, DashboardComponent, ClassListComponent, ClassPostsComponent, CreateTipComponent]
 })
 
 export class ThirdPartyModule{}

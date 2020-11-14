@@ -10,6 +10,10 @@ import { ThirdPartyModule } from './components/third-party.module';
 import { ClassesComponent } from './components/classes/classes.component';
 
 import { MainLayoutComponent } from './layouts/main-layout.component';
+import { AuthService } from './shared/auth.service';
+
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -24,8 +28,11 @@ import { MainLayoutComponent } from './layouts/main-layout.component';
     BrowserAnimationsModule,
     ThirdPartyModule,
     HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule
     
   ],
+  // providers: [AuthService],
   providers: [],
   bootstrap: [AppComponent]
 })

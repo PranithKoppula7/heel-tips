@@ -13,6 +13,11 @@ router.get('/department-list', async (req, res) => {
     res.send(uniqueDepartments);
 });
 
+router.post('/create-tip', async (req, res) => {
+
+});
+
+
 router.get('/:department/class-list', async (req, res) => {
     let department = req.params.department;
 

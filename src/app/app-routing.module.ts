@@ -9,6 +9,8 @@ import { AuthGuard } from './auth.guard';
 import { ClassListComponent } from './components/classes/class-list/class-list.component';
 import { MainLayoutComponent } from './layouts/main-layout.component';
 import { ClassPostsComponent } from './components/class-posts/class-posts.component';
+import { CreateTipComponent } from './components/create-tip/create-tip.component';
+import { PostService } from './shared/post.service';
 
 
 const routes: Routes = [
@@ -40,10 +42,6 @@ const routes: Routes = [
           path: '',
           component: ClassesComponent
         },
-        // {
-        //   path: ':dept',
-        //   component: ClassListComponent
-        // }
         {
           path: 'class-list',
           component: ClassListComponent
@@ -51,6 +49,16 @@ const routes: Routes = [
           path: 'class-posts',
           component: ClassPostsComponent
         }
+    ]
+  }, {
+    path: 'create-tip',
+    component: MainLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: CreateTipComponent
+      }
     ]
   }
 ];

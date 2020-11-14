@@ -1,0 +1,33 @@
+<div class="container" >
+    <mat-card class="mat-elevation-z4" >
+        <mat-card-title>Create Tip</mat-card-title>
+        <form fxLayoutAlign="stretch" fxLayout="column" class="form">
+            <mat-form-field>
+                <input matInput placeholder="Title" required name="title" [(ngModel)]='post.title'>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Your Tips...</mat-label>
+                <textarea matInput rows="5" [(ngModel)]='post.body' name="body"></textarea>
+            </mat-form-field>
+            <mat-form-field>
+                <input type="text" placeholder="Dept." aria-label="Department" matInput [formControl]="myControl"
+                    [matAutocomplete]="auto" [(ngModel)]='post.department' name="department">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-autocomplete>
+                <mat-hint>If your department does not show up, enter the 4 letter department name</mat-hint>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <input matInput placeholder="Class #" required name="class" [(ngModel)]='post.class'>
+            </mat-form-field>
+            <br>
+            <div class="buttons">
+                <button mat-raised-button type="submit" class="create-button" (click)="onSubmit()">Create Tip</button>
+                <button mat-raised-button type="submit" class="cancel-button" color="warn" (click)="onCancel()">Cancel</button>
+            </div>
+        </form>
+    </mat-card>
+</div>
