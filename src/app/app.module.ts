@@ -14,13 +14,15 @@ import { AuthService } from './shared/auth.service';
 
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { EditPostComponent } from './components/edit-post/edit-post.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
     ClassesComponent,
-    MainLayoutComponent
+    MainLayoutComponent,
+    EditPostComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,6 @@ import { MatInputModule } from '@angular/material/input';
     
   ],
   providers: [AuthService],
-  // providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

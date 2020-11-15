@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PostService } from 'src/app/shared/post.service';
 import { AuthService } from 'src/app/shared/auth.service';
 
@@ -13,9 +13,17 @@ export class ClassPostsComponent implements OnInit {
   class: number;
   posts: [];
   currUser = {
+    email: '',
+    id: '',
+    name: ''
 
   }
-  constructor(private route: ActivatedRoute, private postService: PostService, private authService: AuthService) { }
+  constructor(private route: ActivatedRoute, 
+    private postService: PostService, 
+    private authService: AuthService,
+    private router: Router
+    
+    ) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: Params) => {
@@ -27,9 +35,13 @@ export class ClassPostsComponent implements OnInit {
       this.posts = res;
     });
 
-    this.authService.getCurrUser().subscribe((res) => {
+    this.authService.getCurrUser().subscribe((res: any) => {
       this.currUser = res;
-    })
+    });
+  }
+
+  onEdit(id) {
+    this.router.navigate(['/edit-tip'], { queryParams: { id: id}});
   }
 
 }

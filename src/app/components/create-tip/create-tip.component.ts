@@ -66,7 +66,8 @@ export class CreateTipComponent implements OnInit {
     this.post.author = this.currUser.name;
     this.post.authorId = this.currUser.id;
     this.post.created = Date.now();
-
+    this.post.likeCount = 0;
+    
     this.postService.createPost(this.post).subscribe((res) => {
       console.log(res);
     });

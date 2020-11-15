@@ -24,4 +24,12 @@ export class PostService {
   createPost(post) {
     return this.http.post(baseUrl + '/post/create-post', post);
   }
+
+  getPostById(id) {
+    return this.http.get(baseUrl + `/post/${id}`);
+  }
+
+  updatePost(id, post) {
+    return this.http.put(baseUrl + `/post/${id}`, post);
+  }
 }

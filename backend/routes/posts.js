@@ -33,6 +33,30 @@ router.post('/create-post', async (req, res) => {
     });
 });
 
+router.put('/:id', async (req, res) => {
+    let post = await Post.findOne({_id: req.params.id});
+
+    post.title = req.body.title;
+    post.body = req.body.body,
+    post.author = req.body.author,
+    post.authorId =  req.body.authorId,
+    post.created = req.body.created,
+    post.likeCount = req.body.likeCount,
+    post.isLiked = false,
+    post.department = req.body.department,
+    post.class = req.body.class
+
+    await post.save().then((data) => {
+        res.send({success: true, message: "Updated!"});
+    }).catch(err => {
+        res.send({success: false, message: err});
+    });
+});
+
+router.get('/:id', async (req, res) => {
+    let post = await Post.find({_id: req.params.id});
+    res.send(post);
+});
 
 router.get('/:department/class-list', async (req, res) => {
     let department = req.params.department;
@@ -59,6 +83,8 @@ router.get('/:department/:class', async (req, res) => {
     const posts = await Post.find({department: department}).find({class: _class});
     res.send(posts);
 });
+
+
 
 
 module.exports = router;
