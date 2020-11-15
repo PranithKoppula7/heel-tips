@@ -51,10 +51,24 @@ router.get('/logout', (req, res) => {
     res.send({success: true, message: "Logged out!"});
 });
 
+router.get('/curr-user', (req, res) => {
+    if(req.session.user) {
+        let currUser = {
+            name: req.session.user.name,
+            id: req.session.user._id,
+            emai: req.session.user.email
+        }
+        res.send(currUser).status(200);
+        return;
+    } else {
+        res.send('Unauthorized!').status(400);
+    }
+})
+
 router.get('/', async (req, res) => {
     const users = await User.find();
     res.send(users);
-})
+});
 
 
 module.exports = router;

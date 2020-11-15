@@ -25,8 +25,6 @@ export class ClassesComponent implements OnInit {
 
 
   goClass(department) {
-    // this.router.navigate(['class-list'], { queryParams: {dept: department}})
-    department = department.toLowerCase();
     this.router.navigate(['classes/class-list'], { queryParams: {dept: department}});
   }
 

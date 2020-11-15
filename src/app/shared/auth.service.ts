@@ -35,4 +35,10 @@ export class AuthService {
       }
     });
   }
+
+  getCurrUser() {
+    return this.http.get(baseUrl + '/user/curr-user', {withCredentials: true});
+  }
+
+
 }

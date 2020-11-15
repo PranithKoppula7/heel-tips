@@ -11,6 +11,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatIconModule} from '@angular/material/icon';
 
 
 import { LoginComponent } from './login/login.component';
@@ -35,7 +36,8 @@ import { CreateTipComponent } from './create-tip/create-tip.component';
         MatChipsModule,
         RouterModule,
         BrowserModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatIconModule
     ],
     exports: [
         MatToolbarModule,
@@ -49,7 +51,8 @@ import { CreateTipComponent } from './create-tip/create-tip.component';
         MatChipsModule,
         RouterModule,
         BrowserModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatIconModule
     ],
     providers: [AuthService],
     declarations: [LoginComponent, RegisterComponent, DashboardComponent, ClassListComponent, ClassPostsComponent, CreateTipComponent]

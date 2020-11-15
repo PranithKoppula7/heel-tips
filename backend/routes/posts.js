@@ -13,8 +13,24 @@ router.get('/department-list', async (req, res) => {
     res.send(uniqueDepartments);
 });
 
-router.post('/create-tip', async (req, res) => {
+router.post('/create-post', async (req, res) => {
+    const tip = new Post({
+        title: req.body.title,
+        body: req.body.body,
+        author: req.body.author,
+        authorId: req.body.authorId,
+        created: req.body.created,
+        likeCount: req.body.likeCount,
+        isLiked: false,
+        department: req.body.department,
+        class: req.body.class
+    });
 
+    tip.save().then(data => {
+        res.json({success: true, tip: data});
+    }).catch(err => {
+        res.json({success: false, user: null});
+    });
 });
 
 

@@ -20,4 +20,8 @@ export class PostService {
   getPosts(department, _class) {
     return this.http.get(baseUrl + `/post/${department}/${_class}`);
   }
+
+  createPost(post) {
+    return this.http.post(baseUrl + '/post/create-post', post);
+  }
 }

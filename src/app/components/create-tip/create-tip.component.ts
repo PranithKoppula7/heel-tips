@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { PostService } from 'src/app/shared/post.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
   selector: 'app-create-tip',
@@ -12,17 +13,20 @@ import { Router } from '@angular/router';
 })
 export class CreateTipComponent implements OnInit {
 
-  constructor(private postService: PostService, private router: Router) { }
+  constructor(private postService: PostService, private router: Router, private authService: AuthService) { }
 
   myControl = new FormControl();
   options: string[];
   filteredOptions: Observable<string[]>;
+
+  currUser: any = {}
 
   post = {
     department: '',
     title: '',
     body: '',
     author: '',
+    authorId: '',
     likeCount: null,
     isLiked: false,
     created: null,
@@ -34,12 +38,15 @@ export class CreateTipComponent implements OnInit {
       this.options = res;
       
       this.options = this.options.map((department) => department.toUpperCase());
-      console.log(this.options);
 
       this.filteredOptions = this.myControl.valueChanges.pipe(
         startWith(''),
         map(value => this._filter(value))
       );
+
+      this.authService.getCurrUser().subscribe((res) => {
+        this.currUser = res;
+      });
     });
 
     
@@ -56,7 +63,14 @@ export class CreateTipComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.post);
+    this.post.author = this.currUser.name;
+    this.post.authorId = this.currUser.id;
+    this.post.created = Date.now();
+
+    this.postService.createPost(this.post).subscribe((res) => {
+      console.log(res);
+    });
+    
   }
 
 }
