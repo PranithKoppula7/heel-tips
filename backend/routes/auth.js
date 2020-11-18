@@ -66,6 +66,10 @@ router.get('/curr-user', (req, res) => {
 })
 
 router.get('/', async (req, res) => {
+    if(!req.session.user) {
+        res.send('Unauthorized');
+        return;
+    }
     const users = await User.find();
     res.send(users);
 });

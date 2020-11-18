@@ -9,7 +9,8 @@ const PostSchema = mongoose.Schema({
     likeCount: Number,
     isLiked: false,
     department: String,
-    class: Number
+    class: Number,
+    likedUsers: Array
 })
 
 module.exports = mongoose.model('Post', PostSchema);

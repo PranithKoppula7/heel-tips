@@ -11,13 +11,16 @@ import { AuthService } from 'src/app/shared/auth.service';
 export class ClassPostsComponent implements OnInit {
   dept: string;
   class: number;
-  posts: [];
+  posts = []
   currUser = {
     email: '',
     id: '',
     name: ''
 
   }
+  
+  userLiked:boolean = false;
+
   constructor(private route: ActivatedRoute, 
     private postService: PostService, 
     private authService: AuthService,
@@ -31,17 +34,40 @@ export class ClassPostsComponent implements OnInit {
       this.class = params.class;
     });
 
+    this.authService.getCurrUser().subscribe((res: any) => {
+      this.currUser = res;
+    });
+
     this.postService.getPosts(this.dept, this.class).subscribe((res: []) => {
       this.posts = res;
     });
 
-    this.authService.getCurrUser().subscribe((res: any) => {
-      this.currUser = res;
-    });
+
+   
   }
 
   onEdit(id) {
     this.router.navigate(['/edit-tip'], { queryParams: { id: id}});
+  }
+
+  onDelete(id) {
+    this.postService.deletePost(id).subscribe((res: any) => {
+      console.log(res);
+      if(res.success) {
+        let index = this.posts.findIndex((post => post._id === id));
+      this.posts.splice(index, 1);
+      }
+    });
+  }
+
+  like(id) {
+    console.log('liking')
+    console.log(id)
+  }
+
+  dislike(id) {
+    console.log('disliking')
+    console.log(id)
   }
 
 }

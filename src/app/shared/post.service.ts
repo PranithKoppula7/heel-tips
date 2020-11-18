@@ -10,26 +10,30 @@ export class PostService {
   constructor(private http: HttpClient) { }
 
   getDepartments() {
-    return this.http.get(baseUrl + '/post/department-list');
+    return this.http.get(baseUrl + '/post/department-list', { withCredentials: true});
   }
 
   getClassesByDepartment(dept) {
-    return this.http.get(baseUrl + `/post/${dept}/class-list`);
+    return this.http.get(baseUrl + `/post/${dept}/class-list`, { withCredentials: true});
   }
 
   getPosts(department, _class) {
-    return this.http.get(baseUrl + `/post/${department}/${_class}`);
+    return this.http.get(baseUrl + `/post/${department}/${_class}`, { withCredentials: true});
   }
 
   createPost(post) {
-    return this.http.post(baseUrl + '/post/create-post', post);
+    return this.http.post(baseUrl + '/post/create-post', post, { withCredentials: true});
   }
 
   getPostById(id) {
-    return this.http.get(baseUrl + `/post/${id}`);
+    return this.http.get(baseUrl + `/post/${id}`, { withCredentials: true});
   }
 
   updatePost(id, post) {
-    return this.http.put(baseUrl + `/post/${id}`, post);
+    return this.http.put(baseUrl + `/post/${id}`, post, { withCredentials: true});
+  }
+
+  deletePost(id) {
+    return this.http.delete(baseUrl + `/post/${id}`, { withCredentials: true});
   }
 }
