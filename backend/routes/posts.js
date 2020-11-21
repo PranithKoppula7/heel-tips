@@ -1,14 +1,23 @@
 const router = require('express').Router();
 const Post = require('../models/Post');
 
-router.get('/', async (req, res) => {
-    if(req.session.user) {
-        const posts = await Post.find();
-        res.send(posts);
-    } else {
+router.get('/top-tips', async (req, res) => {
+    if(!req.session.user) {
         res.send('Unauthorized!');
+        return;
     }
-    
+
+    const posts = await Post.find();
+    posts.sort(function(a, b) {
+        return b.likeCount - a.likeCount;
+    });
+
+    if(posts.length > 2) {
+        let sliced = posts.slice(0, 3);
+        res.send(sliced);
+    } else {
+        res.send(posts);
+    }
 });
 
 router.get('/department-list', async (req, res) => {
@@ -131,6 +140,9 @@ router.get('/:department/:class', async (req, res) => {
     let _class = req.params.class;
 
     const posts = await Post.find({department: department}).find({class: _class});
+    posts.sort(function(a, b) {
+        return b.likeCount - a.likeCount;
+    });
     res.send(posts);
 });
 

@@ -3,11 +3,6 @@ div.container {
 }
 .container {
     padding: 5% 5% 10% 5%;
-    
-
-    // mat-card {
-    //     display: inline;
-    // }
 
     .welcome-card {
         height: 50%;
@@ -19,7 +14,19 @@ div.container {
     margin-bottom: 5px;
 }
 
-.example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
-  }
+mat-card-header {
+    margin: 0;
+}
+
+.fire {
+    color: rgb(235, 61, 8);
+}
+
+.top-tips {
+    display: flex;
+    align-items: center;
+}
+
+.like-button {
+    color: #4b9cd3;
+}

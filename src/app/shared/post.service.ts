@@ -36,4 +36,16 @@ export class PostService {
   deletePost(id) {
     return this.http.delete(baseUrl + `/post/${id}`, { withCredentials: true});
   }
+
+  likePost(id) {
+    return this.http.put(baseUrl + `/post/like/${id}`, {}, { withCredentials: true});
+  }
+
+  dislikePost(id) {
+    return this.http.put(baseUrl + `/post/dislike/${id}`, {}, { withCredentials: true});
+  }
+
+  getTopTips() {
+    return this.http.get(baseUrl + '/post/top-tips', {withCredentials: true});
+  }
 }

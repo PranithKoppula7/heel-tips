@@ -52,22 +52,32 @@ export class ClassPostsComponent implements OnInit {
 
   onDelete(id) {
     this.postService.deletePost(id).subscribe((res: any) => {
-      console.log(res);
       if(res.success) {
         let index = this.posts.findIndex((post => post._id === id));
-      this.posts.splice(index, 1);
+        this.posts.splice(index, 1);
       }
     });
   }
 
   like(id) {
-    console.log('liking')
-    console.log(id)
+    this.postService.likePost(id).subscribe((res: any) => {
+      if(res.success) {
+        let post: any = this.posts.filter((post => post._id === id))[0];
+        post.likedUsers.push(this.currUser.id);
+        post.likeCount++;
+      }
+    })
   }
 
   dislike(id) {
-    console.log('disliking')
-    console.log(id)
+    this.postService.dislikePost(id).subscribe((res: any) => {
+      if(res.success) {
+        let post: any = this.posts.filter((post => post._id === id))[0];
+        let index = post.likedUsers.findIndex((_id) => _id === this.currUser.id);
+        post.likedUsers.splice(index, 1);
+        post.likeCount--;
+      }
+    })
   }
 
 }

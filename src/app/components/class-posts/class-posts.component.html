@@ -2,10 +2,8 @@
     <div class="title mat-display-2">{{dept | uppercase}} {{class}}</div>
     <div class="card-wrapper" *ngFor="let post of posts">
         <mat-card class="example-card" #card>
-            <mat-card-header>
-                <mat-card-title>{{post.title}}</mat-card-title>
-                <mat-card-subtitle>By {{post.author}} | {{post.created | date: 'fullDate'}}</mat-card-subtitle>
-            </mat-card-header>
+            <mat-card-title>{{post.title}}</mat-card-title>
+            <mat-card-subtitle>By {{post.author}} | {{post.created | date: 'fullDate'}}</mat-card-subtitle>
             <mat-card-content>
                 <p>
                     {{post.body}}
@@ -13,10 +11,13 @@
             </mat-card-content>
             <mat-card-actions fxLayoutAlign="space-between center">
                 <div class="like-container">
-                    <button mat-icon-button class="like-button" *ngIf="!post.likedUsers.includes(currUser.id)" (click)="like(post._id)">
+                    <button mat-icon-button class="like-button" *ngIf="post.authorId != currUser.id && !post.likedUsers.includes(currUser.id)" (click)="like(post._id)">
                         <mat-icon>favorite_border</mat-icon>
                     </button>
-                    <button mat-icon-button class="like-button" *ngIf="post.likedUsers.includes(currUser.id)" (click)="dislike(post._id)">
+                    <button mat-icon-button class="like-button" *ngIf="post.authorId != currUser.id && post.likedUsers.includes(currUser.id)" (click)="dislike(post._id)">
+                        <mat-icon>favorite</mat-icon>
+                    </button>
+                    <button mat-icon-button class="like-button" *ngIf="post.authorId === currUser.id" disabled>
                         <mat-icon>favorite</mat-icon>
                     </button>
                     <span class="like-count">{{post.likeCount}}</span>

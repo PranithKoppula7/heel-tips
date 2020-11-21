@@ -29,9 +29,9 @@ export class AuthService {
   }
 
   logout() {
-    this.http.get(baseUrl + '/user/logout').subscribe((res: any) => {
-      if(res.success) {
-        this.router.navigate(['/'])
+    this.http.get(baseUrl + '/user/logout', {withCredentials: true}).subscribe((res: any) => {
+      if(res.success){
+        this.router.navigate(['/']);
       }
     });
   }
