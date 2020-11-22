@@ -11,6 +11,7 @@ import { MainLayoutComponent } from './layouts/main-layout.component';
 import { ClassPostsComponent } from './components/class-posts/class-posts.component';
 import { CreateTipComponent } from './components/create-tip/create-tip.component';
 import { EditPostComponent } from './components/edit-post/edit-post.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 const routes: Routes = [
@@ -68,6 +69,16 @@ const routes: Routes = [
       {
         path: '',
         component: EditPostComponent
+      }
+    ]
+  }, {
+    path: 'profile',
+    component: MainLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '', 
+        component: ProfileComponent
       }
     ]
   }

@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
         <div>
             <a href="dashboard" mat-button>Home</a>
             <a href="classes" mat-button>Classes</a>
-            <button mat-button>Profile</button>
+            <a href="profile" mat-button>Profile</a>
             <button mat-button (click)="logout()">Logout</button>
             <a class="create-button" href="create-tip" mat-raised-button>Create Tip!</a>
         </div>
@@ -26,14 +26,4 @@ export class MainLayoutComponent {
         this.authService.logout();
       }
 }
-
-// mat-toolbar {
-//     background: #4b9cd3;
-//     color: white;
-//     justify-content: space-between;
-// }
-
-// span {
-//     margin-right: 1rem;
-// }
 

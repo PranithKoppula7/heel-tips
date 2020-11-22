@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatIconModule} from '@angular/material/icon';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 import { LoginComponent } from './login/login.component';
@@ -21,6 +22,7 @@ import { ClassListComponent } from './classes/class-list/class-list.component';
 import { ClassPostsComponent } from './class-posts/class-posts.component';
 import { AuthService } from '../shared/auth.service';
 import { CreateTipComponent } from './create-tip/create-tip.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -37,7 +39,8 @@ import { CreateTipComponent } from './create-tip/create-tip.component';
         RouterModule,
         BrowserModule,
         MatAutocompleteModule,
-        MatIconModule
+        MatIconModule,
+        MatSnackBarModule
     ],
     exports: [
         MatToolbarModule,
@@ -52,10 +55,11 @@ import { CreateTipComponent } from './create-tip/create-tip.component';
         RouterModule,
         BrowserModule,
         MatAutocompleteModule,
-        MatIconModule
+        MatIconModule,
+        MatSnackBarModule
     ],
     providers: [AuthService],
-    declarations: [LoginComponent, RegisterComponent, DashboardComponent, ClassListComponent, ClassPostsComponent, CreateTipComponent]
+    declarations: [LoginComponent, RegisterComponent, DashboardComponent, ClassListComponent, ClassPostsComponent, CreateTipComponent, ProfileComponent]
 })
 
 export class ThirdPartyModule{}

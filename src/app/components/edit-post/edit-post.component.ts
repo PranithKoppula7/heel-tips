@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { PostService } from 'src/app/shared/post.service';
 import { AuthService } from 'src/app/shared/auth.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-post',
@@ -23,7 +24,9 @@ export class EditPostComponent implements OnInit {
 
   constructor(private postService: PostService, 
     private authService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackbar: MatSnackBar,
+    private router: Router
     ) { }
 
   private _filter(value: string): string[] {
@@ -61,9 +64,17 @@ export class EditPostComponent implements OnInit {
   }
 
   onSave() {
-    this.postService.updatePost(this.id, this.post).subscribe((res) => {
-      console.log(res);
+    this.postService.updatePost(this.id, this.post).subscribe((res: any) => {
+      if(res.success) {
+        this.snackbar.open('Updated!', '', {
+          duration: 2000
+        });
+      }
     })
+  }
+
+  onCancel() {
+    this.router.navigate(['/classes']);
   }
 
 }

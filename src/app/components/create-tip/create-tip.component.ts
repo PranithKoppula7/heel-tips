@@ -5,6 +5,7 @@ import {map, startWith} from 'rxjs/operators';
 import { PostService } from 'src/app/shared/post.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-tip',
@@ -13,7 +14,9 @@ import { AuthService } from 'src/app/shared/auth.service';
 })
 export class CreateTipComponent implements OnInit {
 
-  constructor(private postService: PostService, private router: Router, private authService: AuthService) { }
+  constructor(private postService: PostService, private router: Router, private authService: AuthService,
+              private snackbar: MatSnackBar
+    ) { }
 
   myControl = new FormControl();
   options: string[];
@@ -68,8 +71,12 @@ export class CreateTipComponent implements OnInit {
     this.post.created = Date.now();
     this.post.likeCount = 0;
     
-    this.postService.createPost(this.post).subscribe((res) => {
-      console.log(res);
+    this.postService.createPost(this.post).subscribe((res: any) => {
+      if(res.success) {
+        this.snackbar.open('Created! Check the classes to see your post!', '', {
+          duration: 2000
+        })
+      }
     });
     
   }

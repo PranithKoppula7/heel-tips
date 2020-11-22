@@ -20,24 +20,37 @@ export class AuthService {
     return this.http.post(baseUrl + '/user/login', user, { withCredentials: true}).subscribe((res: any) => {
       if(res.success) {
         this.router.navigate(['/dashboard']);
+        localStorage.setItem('loggedIn', 'true');
       }
     });
   }
 
   loggedIn() {
-    return this.http.get<boolean>(baseUrl + '/user/logged-in', { withCredentials: true});
+    this.http.get<boolean>(baseUrl + '/user/logged-in', { withCredentials: true }).subscribe((res) => {
+      if(res) {
+        localStorage.setItem('loggedIn', 'true');
+      } else {
+        localStorage.setItem('loggedIn', 'false');
+      }
+    });
+    return localStorage.getItem('loggedIn') === 'true';
   }
 
   logout() {
     this.http.get(baseUrl + '/user/logout', {withCredentials: true}).subscribe((res: any) => {
       if(res.success){
         this.router.navigate(['/']);
+        localStorage.removeItem('loggedIn')
       }
     });
   }
 
   getCurrUser() {
     return this.http.get(baseUrl + '/user/curr-user', {withCredentials: true});
+  }
+
+  updateUser(id, user) {
+    return this.http.put(baseUrl + `/user/${id}`, user, {withCredentials: true});
   }
 
 

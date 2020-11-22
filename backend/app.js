@@ -6,10 +6,12 @@ const postRoute = require('./routes/posts');
 const session = require('express-session');
 const cors = require('cors');
 const app = express();
+const path = require('path');
 
-app.get('/', (req, res) => {
-    res.send('we are home');
-});
+
+// app.get('/', (req, res) => {
+//     res.send('we are home');
+// });
 
 // Middleware
 app.use(express.json());
@@ -22,6 +24,7 @@ app.use(session({
 }));
 
 app.use(cors({origin: ['http://localhost:4200'], credentials: true}));
+// app.use(cors({credentials: true}));
 
 // MongoDB Connection
 mongoose.connect(process.env.DB_CONNECTION, 
@@ -29,8 +32,15 @@ mongoose.connect(process.env.DB_CONNECTION,
     console.log('connected to db')
 })
 
-
-app.listen(3000);
-
 app.use('/api/user', authRoute);
 app.use('/api/post', postRoute);
+
+// app.use(express.static('public'));
+
+
+// app.get('*', function(req, res) {
+//     res.sendFile(path.join(__dirname + '/public/index.html'));
+// });
+
+app.listen(process.env.PORT || 3000);
+

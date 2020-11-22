@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,7 @@ export class RegisterComponent implements OnInit {
     pid: null,
   }
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private snackbar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -22,7 +23,9 @@ export class RegisterComponent implements OnInit {
   register() {
     this.authService.register(this.user).subscribe((res: any) => {
       if(res.success) {
-        console.log(res)
+        this.snackbar.open('Registered! Go to Login page to access the app', '', {
+          duration: 2000
+        });
       }
     })
   }

@@ -56,7 +56,8 @@ router.get('/curr-user', (req, res) => {
         let currUser = {
             name: req.session.user.name,
             id: req.session.user._id,
-            emai: req.session.user.email
+            email: req.session.user.email,
+            pid: req.session.user.pid
         }
         res.send(currUser).status(200);
         return;
@@ -67,11 +68,32 @@ router.get('/curr-user', (req, res) => {
 
 router.get('/', async (req, res) => {
     if(!req.session.user) {
-        res.send('Unauthorized');
+        res.send('Unauthorized!');
         return;
     }
     const users = await User.find();
     res.send(users);
+});
+
+router.put('/:id', async (req, res) => {
+    if(!req.session.user) {
+        res.send('Unauthorized!');
+        return;
+    }
+    const user = await User.findOne({_id: req.params.id});
+
+    user.name = req.body.name;
+    user.email = req.body.email;
+    user.pid = req.body.pid;
+
+    await user.save().then((data) => {
+        req.session.user = data;
+        res.send({success: true, message: "success!"});
+        return;
+    }).catch((err) => {
+        res.send({success: false, error: err});
+        return;
+    });
 });
 
 

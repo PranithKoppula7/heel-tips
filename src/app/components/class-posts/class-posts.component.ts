@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PostService } from 'src/app/shared/post.service';
 import { AuthService } from 'src/app/shared/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-class-posts',
@@ -24,7 +25,8 @@ export class ClassPostsComponent implements OnInit {
   constructor(private route: ActivatedRoute, 
     private postService: PostService, 
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private snackbar: MatSnackBar
     
     ) { }
 
@@ -55,6 +57,9 @@ export class ClassPostsComponent implements OnInit {
       if(res.success) {
         let index = this.posts.findIndex((post => post._id === id));
         this.posts.splice(index, 1);
+        this.snackbar.open('Deleted!', '', {
+          duration: 2000
+        })
       }
     });
   }
