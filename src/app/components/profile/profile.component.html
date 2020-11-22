@@ -1,0 +1,22 @@
+<div class="container">
+    <mat-card class="mat-elevation-z4">
+        <mat-card-title>Profile</mat-card-title>
+        <form fxLayoutAlign="stretch" fxLayout="column" class="form">
+            <mat-form-field>
+                <input matInput placeholder="Name" required name="name" [(ngModel)]='currUser.name'>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Email" required name="email" [(ngModel)]='currUser.email'>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <input matInput placeholder="PID" required name="pid" [(ngModel)]='currUser.pid'>
+            </mat-form-field>
+            <br>
+            <div class="buttons">
+                <button mat-raised-button type="submit" class="save-button" (click)="onSave()">Save</button>
+                <button mat-raised-button type="submit" class="cancel-button" color="warn" (click)="onCancel()">Cancel</button>
+            </div>
+        </form>
+    </mat-card>
+</div>
