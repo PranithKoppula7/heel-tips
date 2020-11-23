@@ -16,6 +16,7 @@ This is the custom backend built for the Heel Tips Website. This is split into t
 **Request Params:** None
 
 **Example Response:**
+
     HTTP Code 200
     true
 
@@ -130,7 +131,7 @@ This is the custom backend built for the Heel Tips Website. This is split into t
     { success: true, user: { MongoDB created User...} }
 
 
-### PUT
+## PUT
 
 ###  ```/:id```
 
