@@ -66,6 +66,18 @@ export class CreateTipComponent implements OnInit {
   }
 
   onSubmit() {
+    if(this.post.body === '' || this.post.class === null || this.post.title === '' || this.post.department === '') {
+      this.snackbar.open('Fill out the relevant fields', '', {
+        duration: 3000
+      });
+      return;
+    } else if(isNaN(this.post.class)) {
+      this.snackbar.open('Enter a number for class #', '', {
+        duration: 3000
+      });
+      return;
+    }
+
     this.post.author = this.currUser.name;
     this.post.authorId = this.currUser.id;
     this.post.created = Date.now();

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { baseUrl } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class AuthService {
 
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private snackbar: MatSnackBar) { }
 
   register(user) {
     return this.http.post(baseUrl + '/user/register', user);
@@ -21,7 +22,11 @@ export class AuthService {
       if(res.success) {
         this.router.navigate(['/dashboard']);
         localStorage.setItem('loggedIn', 'true');
-      }
+      } 
+    }, (err) => {
+      this.snackbar.open(err.error.message, '', {
+        duration: 3000
+      })
     });
   }
 

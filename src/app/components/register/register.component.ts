@@ -21,6 +21,17 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    if(this.user.name === '' || this.user.email === '' || this.user.password === '' || this.user.pid === null) {
+      this.snackbar.open('Fill out the relevant fields', '', {
+        duration: 3000
+      });
+      return;
+    } else if(isNaN(this.user.pid)) {
+      this.snackbar.open('Enter a number for pid', '', {
+        duration: 3000
+      });
+      return;
+    }
     this.authService.register(this.user).subscribe((res: any) => {
       if(res.success) {
         this.snackbar.open('Registered! Go to Login page to access the app', '', {

@@ -8,6 +8,8 @@ mat-card {
     width: 50%;
     margin: 0 auto;
     margin-bottom: 5px;
+    animation-name: fadeIn;
+    animation-duration: 2s;
     &:hover {
         cursor: pointer;
         background: darken($color: white, $amount: 2%);
@@ -19,4 +21,16 @@ mat-card-title {
     text-align: center;
     margin-bottom: 20px;
     font-size: 2rem;
+}
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(200px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

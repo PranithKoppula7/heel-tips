@@ -33,23 +33,82 @@ mat-toolbar {
     align-items: flex-start;
 
     .title {
-        // background: #4b9cd3;
         padding: 1rem;
         margin-left: 200px;
         border-radius: 10px;
+
         h1 {
-            font-size: 3rem;
+            font-size: 5rem;
+            animation-name: moveToLeft;
+            animation-duration: 2s;
         }
         p {
             font-size: 20px;
             padding: 25px 0px;
             font-weight: 300;
+            animation-name: moveToRight;
+            animation-duration: 2s;
         }
 
         .login, .register {
             background: #4b9cd3;
             color:white;
             margin-right: 10px;
+            animation-name: animateBtn;
+            animation-duration: 1s;
+            animation-delay: 2s;
+            animation-fill-mode: backwards;
         }
+    }
+}
+
+#about {
+    height: 50vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    color: black;
+    padding: 20px;
+    align-items: center;
+    h3 {
+        margin-left: 100px;
+        font-size: 3rem;
+        font-weight: 400;
+        color: #4b9cd3;
+    }
+
+    p{
+        font-size: 2rem;
+        font-weight: 200;
+    }
+}
+
+@keyframes moveToLeft {
+   0% {
+       transform: translateX(120px);
+       opacity: 0;
+   } 
+   100% {
+    transform: translateX(0);
+    opacity: 1;
+   }
+}
+
+@keyframes moveToRight {
+    0% {
+        transform: translateX(-120px);
+        opacity: 0;
+    } 
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+ }
+
+@keyframes animateBtn {
+    0% {
+        opacity: 0;
+    } 
+    100% {
+        opacity: 1;
     }
 }

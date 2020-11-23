@@ -1,5 +1,5 @@
 <mat-toolbar class="navbar mat-elevation-z4">
-    <div>UNC Resource Manager</div>
+    <div>Heel Tips</div>
     <div>
         <a href="" mat-button>Home</a>
         <a routerLink="/login" mat-button>Login</a>
@@ -15,7 +15,7 @@
             <mat-form-field>
                 <input matInput placeholder="Password" [(ngModel)]='user.password' type="password" required name="password">
             </mat-form-field>
-            <button mat-raised-button type="submit" (click)="login()">Login</button>
+            <button mat-raised-button type="submit" class="login" (click)="login()">Login</button>
             <mat-label class="create-account">Don't have an account? <a href="/register">Create Account</a></mat-label>
         </form>
     </mat-card>

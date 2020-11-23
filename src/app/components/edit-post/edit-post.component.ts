@@ -64,6 +64,18 @@ export class EditPostComponent implements OnInit {
   }
 
   onSave() {
+    if(this.post.body === '' || this.post.class === null || this.post.title === '' || this.post.department === '') {
+      this.snackbar.open('Fill out the relevant fields', '', {
+        duration: 3000
+      });
+      return;
+    } else if(isNaN(this.post.class)) {
+      this.snackbar.open('Enter a number for class #', '', {
+        duration: 3000
+      });
+      return;
+    }
+
     this.postService.updatePost(this.id, this.post).subscribe((res: any) => {
       if(res.success) {
         this.snackbar.open('Updated!', '', {

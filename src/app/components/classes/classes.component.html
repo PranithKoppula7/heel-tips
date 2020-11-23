@@ -1,7 +1,4 @@
 <div class="container">
-    
     <mat-card-title>DEPARTMENTS</mat-card-title>
-    <!-- <mat-card *ngFor="let department of deparments" [routerLink]="['classes/:dept', department]">{{department}}</mat-card> -->
-    <!-- <mat-card *ngFor="let department of deparments" routerLink="dept">{{department}}</mat-card> -->
-    <mat-card *ngFor="let department of deparments" (click)="goClass(department)">{{department}}</mat-card>
+    <mat-card *ngFor="let department of deparments" class="dept-card" (click)="goClass(department)">{{department}}</mat-card>
 </div>

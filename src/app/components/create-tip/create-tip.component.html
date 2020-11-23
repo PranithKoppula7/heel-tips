@@ -7,11 +7,11 @@
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Your Tips...</mat-label>
-                <textarea matInput rows="5" [(ngModel)]='post.body' name="body"></textarea>
+                <textarea matInput rows="5" [(ngModel)]='post.body' name="body" required></textarea>
             </mat-form-field>
             <mat-form-field>
                 <input type="text" placeholder="Dept." aria-label="Department" matInput [formControl]="myControl"
-                    [matAutocomplete]="auto" [(ngModel)]='post.department' name="department">
+                    [matAutocomplete]="auto" [(ngModel)]='post.department' name="department" required>
                 <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                     <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                         {{option}}
