@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../models/User');
+const Post = require('../models/Post');
 const bcrypt = require('bcrypt');
 
 router.post('/register', async (req, res) => {
@@ -57,7 +58,8 @@ router.get('/curr-user', (req, res) => {
             name: req.session.user.name,
             id: req.session.user._id,
             email: req.session.user.email,
-            pid: req.session.user.pid
+            pid: req.session.user.pid,
+            bookmarkedTips: req.session.user.bookmarkedTips
         }
         res.send(currUser).status(200);
         return;
@@ -94,6 +96,56 @@ router.put('/:id', async (req, res) => {
         res.send({success: false, error: err});
         return;
     });
+});
+
+router.post('/bookmark/:id', async (req, res) => {
+    if(!req.session.user) {
+        res.send('Unauthorized!');
+        return;
+    }
+
+    const post = await Post.findOne({_id: req.params.id});
+    const user = await User.findOne({_id: req.body.id});
+
+    if(post) {
+        user.bookmarkedTips.push(req.params.id);
+        await user.save();
+        req.session.user = user;
+        res.send({success: true, message:'Bookmarked!'});
+        return;
+    } else {
+        res.send({success: false, message:'Could not bookmark'});
+    }
+});
+
+router.post('/unbookmark/:id', async (req, res) => {
+    if(!req.session.user) {
+        res.send('Unauthorized!');
+        return;
+    }
+
+    const user = await User.findOne({_id: req.body.id});
+
+    if(user.bookmarkedTips) {
+        let index = user.bookmarkedTips.indexOf(req.params.id)
+        user.bookmarkedTips.splice(index, 1);
+        await user.save();
+        req.session.user = user;
+        res.send({success: true, message:'Un-bookmarked!'});
+        return;
+    } else {
+        res.send({success: false, message:'Could not bookmark'});
+    }
+});
+
+router.get('/bookmarks', async (req, res) => {
+    if(!req.session.user) {
+        res.send('Unauthorized!');
+        return;
+    }
+
+    res.send(req.session.user.bookmarkedTips);
+
 });
 
 

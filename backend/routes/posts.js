@@ -55,6 +55,24 @@ router.post('/create-post', async (req, res) => {
     });
 });
 
+router.get('/class-list', async (req, res) => {
+    if(!req.session.user) {
+        res.send('Unauthorized!');
+        return;
+    }
+
+    let posts = await Post.find();
+
+    let modifiedPosts = posts.map((post) => {
+        return post.department + " " + post.class;
+    });
+
+    let uniquePosts = [... new Set(modifiedPosts)];;
+
+    res.send(uniquePosts);
+
+})
+
 router.put('/:id', async (req, res) => {
     if(!req.session.user) {
         res.send('Unauthorized!');

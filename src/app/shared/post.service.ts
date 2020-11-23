@@ -48,4 +48,8 @@ export class PostService {
   getTopTips() {
     return this.http.get(baseUrl + '/post/top-tips', {withCredentials: true});
   }
+
+  getClassList() {
+    return this.http.get(baseUrl + '/post/class-list', {withCredentials: true});
+  }
 }

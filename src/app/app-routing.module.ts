@@ -12,6 +12,7 @@ import { ClassPostsComponent } from './components/class-posts/class-posts.compon
 import { CreateTipComponent } from './components/create-tip/create-tip.component';
 import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { BookmarkedTipsComponent } from './components/bookmarked-tips/bookmarked-tips.component';
 
 
 const routes: Routes = [
@@ -79,6 +80,16 @@ const routes: Routes = [
       {
         path: '', 
         component: ProfileComponent
+      }
+    ]
+  }, {
+    path: 'bookmarks',
+    component: MainLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: BookmarkedTipsComponent
       }
     ]
   }

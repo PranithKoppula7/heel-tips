@@ -53,5 +53,17 @@ export class AuthService {
     return this.http.put(baseUrl + `/user/${id}`, user, {withCredentials: true});
   }
 
+  bookmarkTip(userId, postId) {
+    return this.http.post(baseUrl +  `/user/bookmark/${postId}`, {id: userId}, {withCredentials: true});
+  }
+
+  unBookmarkTip(userId, postId) {
+    return this.http.post(baseUrl + `/user/unbookmark/${postId}`, {id: userId}, {withCredentials: true});
+  }
+
+  getBookmarks() {
+    return this.http.get(baseUrl + '/user/bookmarks', {withCredentials: true});
+  }
+
 
 }

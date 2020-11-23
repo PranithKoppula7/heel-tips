@@ -1,13 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../shared/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import { PostService } from '../shared/post.service';
 
 @Component({
   selector: 'app-home-layout',
   template: `
     <mat-toolbar class="navbar mat-elevation-z4">
         <div>Heel Tips</div>
-        <div>
+        <div style="font-size: 14px">
+            <mat-form-field>
+                <input type="text" placeholder="Search Class" aria-label="Search" matInput [formControl]="myControl"
+                    [matAutocomplete]="auto" name="search" (keyup.enter)="onEnter()">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-autocomplete>
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
             <a href="dashboard" mat-button>Home</a>
             <a href="classes" mat-button>Classes</a>
             <a href="profile" mat-button>Profile</a>
@@ -17,13 +31,55 @@ import { Router } from '@angular/router';
     </mat-toolbar>
     <router-outlet></router-outlet>
   `,
-  styles: [' mat-toolbar { background: #4b9cd3; color: white; justify-content: space-between; } span { margin-right: 1rem; } .create-button { background-color: #13294b; color: white; }']
+  styles: [' mat-toolbar { background: #4b9cd3; color: white; justify-content: space-between;} span { margin-right: 1rem; } .create-button { background-color: #13294b; color: white; }']
 })
-export class MainLayoutComponent {
-    constructor(private authService: AuthService, private router: Router) {}
+export class MainLayoutComponent implements OnInit{
+
+  myControl = new FormControl();
+  options: string[];
+  filteredOptions: Observable<string[]>;
+
+    constructor(private authService: AuthService, 
+      private router: Router, 
+      private postService: PostService,
+      private route: ActivatedRoute
+      ) {
+  
+    }
+
+    ngOnInit() {
+      this.postService.getClassList().subscribe((res: string[]) => {
+        this.options = res;
+        
+        this.options = this.options.map((department) => department.toUpperCase());
+  
+        this.filteredOptions = this.myControl.valueChanges.pipe(
+          startWith(''),
+          map(value => this._filter(value))
+        );
+      });
+    }
 
     logout() {
         this.authService.logout();
+    }
+
+    private _filter(value: string): string[] {
+      const filterValue = value.toLowerCase();
+  
+      return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+    }
+
+    onEnter() {
+      if(this.options.includes(this.myControl.value)) {
+        let dept = this.myControl.value.substring(0, 4);
+        let _class = this.myControl.value.substring(5, 8);
+        this.router.navigateByUrl(`classes/class-posts?dept=${dept}&class=${_class}`);
+      } else {
+        return;
       }
+    }
+
+      
 }
 

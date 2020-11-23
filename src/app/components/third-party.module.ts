@@ -23,6 +23,7 @@ import { ClassPostsComponent } from './class-posts/class-posts.component';
 import { AuthService } from '../shared/auth.service';
 import { CreateTipComponent } from './create-tip/create-tip.component';
 import { ProfileComponent } from './profile/profile.component';
+import { BookmarkedTipsComponent } from './bookmarked-tips/bookmarked-tips.component';
 
 
 @NgModule({
@@ -59,7 +60,7 @@ import { ProfileComponent } from './profile/profile.component';
         MatSnackBarModule
     ],
     providers: [AuthService],
-    declarations: [LoginComponent, RegisterComponent, DashboardComponent, ClassListComponent, ClassPostsComponent, CreateTipComponent, ProfileComponent]
+    declarations: [LoginComponent, RegisterComponent, DashboardComponent, ClassListComponent, ClassPostsComponent, CreateTipComponent, ProfileComponent, BookmarkedTipsComponent]
 })
 
 export class ThirdPartyModule{}

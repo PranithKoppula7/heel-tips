@@ -1,3 +1,7 @@
+* {
+    margin: 0;
+}
+
 .navbar {
     justify-content: space-between;
 }
@@ -6,9 +10,46 @@ span {
     margin-right: 1rem;
 }
 
+img {
+    color: white;
+}
 
 mat-toolbar {
     background-color: #4b9cd3;
-    // background-color: -webkit-linear-gradient();
     color: white;
+}
+
+#main {
+    margin: 0;
+    color: white;
+    background-image: linear-gradient( rgba(0,0,0,0.5), rgba(0, 0, 0, 0.5) ), url('../../../assets/images/oldwell.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    .title {
+        // background: #4b9cd3;
+        padding: 1rem;
+        margin-left: 200px;
+        border-radius: 10px;
+        h1 {
+            font-size: 3rem;
+        }
+        p {
+            font-size: 20px;
+            padding: 25px 0px;
+            font-weight: 300;
+        }
+
+        .login, .register {
+            background: #4b9cd3;
+            color:white;
+            margin-right: 10px;
+        }
+    }
 }

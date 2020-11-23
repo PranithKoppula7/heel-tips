@@ -16,8 +16,8 @@ export class ClassPostsComponent implements OnInit {
   currUser = {
     email: '',
     id: '',
-    name: ''
-
+    name: '',
+    bookmarkedTips: []
   }
   
   userLiked:boolean = false;
@@ -34,15 +34,17 @@ export class ClassPostsComponent implements OnInit {
     this.route.queryParams.subscribe((params: Params) => {
       this.dept = params.dept;
       this.class = params.class;
+
+      this.postService.getPosts(this.dept, this.class).subscribe((res: []) => {
+        this.posts = res;
+      });
     });
 
     this.authService.getCurrUser().subscribe((res: any) => {
       this.currUser = res;
     });
 
-    this.postService.getPosts(this.dept, this.class).subscribe((res: []) => {
-      this.posts = res;
-    });
+    
 
 
    
@@ -81,6 +83,23 @@ export class ClassPostsComponent implements OnInit {
         let index = post.likedUsers.findIndex((_id) => _id === this.currUser.id);
         post.likedUsers.splice(index, 1);
         post.likeCount--;
+      }
+    })
+  }
+
+  bookmark(id) {
+    this.authService.bookmarkTip(this.currUser.id, id).subscribe((res: any) => {
+      if(res.success) {
+        this.currUser.bookmarkedTips.push(id);
+      }
+    });
+  }
+
+  unbookmark(id) {
+    this.authService.unBookmarkTip(this.currUser.id, id).subscribe((res:any) => {
+      if(res.success) {
+        let index = this.currUser.bookmarkedTips.indexOf(id);
+        this.currUser.bookmarkedTips.splice(index, 1);
       }
     })
   }
