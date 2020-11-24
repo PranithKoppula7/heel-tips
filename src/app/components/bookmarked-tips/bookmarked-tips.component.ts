@@ -16,7 +16,8 @@ export class BookmarkedTipsComponent implements OnInit {
     email: '',
     id: '',
     name: '',
-    bookmarkedTips: []
+    bookmarkedTips: [],
+    likedUsers: []
   }
   constructor(private authService: AuthService, 
     private postService: PostService,

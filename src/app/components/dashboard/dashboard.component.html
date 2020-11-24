@@ -31,15 +31,15 @@
         </mat-card-title>
         <mat-card-content>
             <mat-card class="post-card" *ngFor="let post of topPosts">
-                <mat-card-title>
+                <mat-card-title fxLayoutAlign="space-between center">
                     {{post.title}}
                     <div class="bookmark">
-                        <button mat-icon-button class="bookmark-button"
+                        <button mat-icon-button class="bookmark-icon"
                             *ngIf="post.authorId != currUser.id && !currUser.bookmarkedTips.includes(post._id)"
                             (click)="bookmark(post._id)">
                             <mat-icon>bookmark_border</mat-icon>
                         </button>
-                        <button mat-icon-button class="bookmark-button"
+                        <button mat-icon-button class="bookmark-icon"
                             *ngIf="post.authorId != currUser.id && currUser.bookmarkedTips.includes(post._id)"
                             (click)="unbookmark(post._id)">
                             <mat-icon>bookmark</mat-icon>
