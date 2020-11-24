@@ -63,6 +63,22 @@ This is the custom backend built for the Heel Tips Website. This is split into t
         ...
      ]
 
+### ```/goals/:id```
+
+**Purpose:** Gets the users goals
+
+**Request Params:** Id of the user
+
+**Example Response:**
+
+    HTTP Code 200
+     [
+        'Goal 1',
+        'Goal 2'
+        ...
+     ]
+
+
 
 ## POST
 
@@ -150,7 +166,42 @@ This is the custom backend built for the Heel Tips Website. This is split into t
 **Example Response:**
 
     HTTP Code 200
-    { success: true, message: "success!" }
+    { success: true }
+ 
+
+###  ```/goal/:id```
+
+**Purpose:** addes the user goal 
+
+**Request Params:** Id of the user
+
+**Request Body:** specific goal to add
+
+    {
+       goal: 'Goal 1'
+    }
+
+**Example Response:**
+
+    HTTP Code 200
+    { success: true }
+    
+###  ```/remove-goal/:id```
+
+**Purpose:** removes the user goal 
+
+**Request Params:** Id of the user
+
+**Request Body:** specific goal to remove
+
+    {
+       goal: 'Goal 1'
+    }
+
+**Example Response:**
+
+    HTTP Code 200
+    { success: true }
 
 
 # Post/Tip 
