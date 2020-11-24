@@ -9,6 +9,18 @@
             <li>Write thoughtful and meaningful tips</li>
             <li>Have fun and share your strategies!</li>
         </ol>
+        <mat-form-field class="example-chip-list" style="width: 100%">
+            <mat-chip-list #chipList aria-label="Fruit selection">
+                <mat-chip *ngFor="let goal of goals" [selectable]="selectable" [removable]="removable"
+                    (removed)="remove(goal)">
+                    {{goal}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="Your Goals..." [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+        </mat-form-field>
         <a href="/bookmarks" class="bookmark-button" mat-raised-button>Bookmarked Tips</a>
     </mat-card>
 

@@ -139,5 +139,50 @@ router.get('/bookmarks', async (req, res) => {
 
 });
 
+router.get('/goals/:id', async (req, res) => {
+    if(!req.session.user) {
+        res.send('Unauthorized!');
+        return;
+    }
+
+    const user = await User.findOne({_id: req.params.id});
+    const goals = user.goals;
+
+    res.send(goals);
+});
+
+router.put('/goal/:id', async (req, res) => {
+    if(!req.session.user) {
+        res.send('Unauthorized!');
+        return;
+    }
+
+    let user = await User.findOne({_id: req.params.id});
+    user.goals.push(req.body.goal);
+
+    await user.save().then((data) => {
+        res.send({success: true})
+    }).catch((err) => {
+        res.send({success: false})
+    });
+});
+
+router.put('/remove-goal/:id', async (req, res) => {
+    if(!req.session.user) {
+        res.send('Unauthorized!');
+        return;
+    }
+
+    let user = await User.findOne({_id: req.params.id});
+    let index = user.goals.indexOf(req.body.goal);
+    user.goals.splice(index, 1);
+
+    await user.save().then((data) => {
+        res.send({success: true})
+    }).catch((err) => {
+        res.send({success: false})
+    });
+})
+
 
 module.exports = router;

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { baseUrl } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -68,6 +67,18 @@ export class AuthService {
 
   getBookmarks() {
     return this.http.get(baseUrl + '/user/bookmarks', {withCredentials: true});
+  }
+
+  getGoals(id) {
+    return this.http.get(baseUrl + `/user/goals/${id}`, {withCredentials: true});
+  }
+
+  postGoal(goal, id) {
+    return this.http.put(baseUrl + `/user/goal/${id}`, {goal: goal}, {withCredentials: true});
+  }
+
+  deleteGoal(goal, id) {
+    return this.http.put(baseUrl + `/user/remove-goal/${id}`, {goal :goal}, {withCredentials: true});
   }
 
 

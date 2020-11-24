@@ -5,7 +5,8 @@ const UserSchema = mongoose.Schema({
     email: String,
     password: String,
     pid: Number,
-    bookmarkedTips: Array
+    bookmarkedTips: Array,
+    goals: Array
 }, {
     collection: 'users'
 });
