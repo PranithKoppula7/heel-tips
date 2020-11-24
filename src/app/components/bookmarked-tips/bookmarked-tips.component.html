@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="no-bookmarks" *ngIf="bookmarkPosts.length === 0">
+    <div class="no-bookmarks" style="display: flex; justify-content: center;" *ngIf="bookmarkPosts.length === 0">
         <mat-card-title>No Bookmarks!</mat-card-title>
     </div>
     <div class="card-wrapper" *ngFor="let post of bookmarkPosts">

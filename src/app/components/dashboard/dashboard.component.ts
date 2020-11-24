@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/auth.service';
 import { PostService } from 'src/app/shared/post.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,12 +15,18 @@ export class DashboardComponent implements OnInit {
   currUser = {
     email: '',
     id: '',
-    name: ''
+    name: '',
+    bookmarkedTips: []
   }
 
   topPosts = [];
 
-  constructor(private authService: AuthService, private postService: PostService, private router: Router) { }
+  constructor(private authService: AuthService, 
+    private postService: PostService, 
+    private router: Router,
+    private snackbar: MatSnackBar
+    
+    ) { }
 
   ngOnInit(): void {
     this.authService.getCurrUser().subscribe((res: any) => {
@@ -40,6 +47,9 @@ export class DashboardComponent implements OnInit {
       if(res.success) {
         let index = this.topPosts.findIndex((post => post._id === id));
         this.topPosts.splice(index, 1);
+        this.snackbar.open('Deleted!', '', {
+          duration: 2000
+        })
       }
     });
   }
@@ -65,6 +75,22 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  bookmark(id) {
+    this.authService.bookmarkTip(this.currUser.id, id).subscribe((res: any) => {
+      if(res.success) {
+        this.currUser.bookmarkedTips.push(id);
+      }
+    });
+  }
+
+  unbookmark(id) {
+    this.authService.unBookmarkTip(this.currUser.id, id).subscribe((res:any) => {
+      if(res.success) {
+        let index = this.currUser.bookmarkedTips.indexOf(id);
+        this.currUser.bookmarkedTips.splice(index, 1);
+      }
+    })
+  }
   
 
 }

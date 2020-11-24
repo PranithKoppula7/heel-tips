@@ -2,7 +2,7 @@
     <mat-card fxFlex="25" class="welcome-card">
         <mat-card-title>Hi {{currUser.name}}!</mat-card-title>
         <mat-card-subtitle>{{todayDate | date: 'fullDate'}}</mat-card-subtitle>
-        
+
         <p>Community Guidelines</p>
         <ol>
             <li>No posting content that clearly violates the Honor Code</li>
@@ -19,35 +19,53 @@
         </mat-card-title>
         <mat-card-content>
             <mat-card class="post-card" *ngFor="let post of topPosts">
-                    <mat-card-title>{{post.title}}</mat-card-title>
-                    <mat-card-subtitle>By {{post.author}} | {{post.created | date: 'fullDate'}}</mat-card-subtitle>
-                    <mat-card-content>
-                        <p>
-                            {{post.body}}
-                        </p>
-                    </mat-card-content>
-                    <mat-card-actions fxLayoutAlign="space-between center">
-                        <div class="like-container">
-                            <button mat-icon-button class="like-button" *ngIf="post.authorId != currUser.id && !post.likedUsers.includes(currUser.id)" (click)="like(post._id)">
-                                <mat-icon>favorite_border</mat-icon>
-                            </button>
-                            <button mat-icon-button class="like-button" *ngIf="post.authorId != currUser.id && post.likedUsers.includes(currUser.id)" (click)="dislike(post._id)">
-                                <mat-icon>favorite</mat-icon>
-                            </button>
-                            <button mat-icon-button class="like-button" *ngIf="post.authorId === currUser.id" disabled>
-                                <mat-icon>favorite</mat-icon>
-                            </button>
-                            <span class="like-count">{{post.likeCount}}</span>
-                        </div>
-        
-                        <div class="action-buttons" *ngIf="post.authorId === currUser.id">
-                            <a mat-icon-button (click)="onEdit(post._id)">
-                                <mat-icon>edit</mat-icon>
-                            </a>
-                            <a mat-icon-button color="warn" (click)="onDelete(post._id)">
-                                <mat-icon>delete</mat-icon>
-                            </a>
-                        </div>
-                    </mat-card-actions>
-    </mat-card>
-<div>
+                <mat-card-title>
+                    {{post.title}}
+                    <div class="bookmark">
+                        <button mat-icon-button class="bookmark-button"
+                            *ngIf="post.authorId != currUser.id && !currUser.bookmarkedTips.includes(post._id)"
+                            (click)="bookmark(post._id)">
+                            <mat-icon>bookmark_border</mat-icon>
+                        </button>
+                        <button mat-icon-button class="bookmark-button"
+                            *ngIf="post.authorId != currUser.id && currUser.bookmarkedTips.includes(post._id)"
+                            (click)="unbookmark(post._id)">
+                            <mat-icon>bookmark</mat-icon>
+                        </button>
+                    </div>
+                </mat-card-title>
+                <mat-card-subtitle>By {{post.author}} | {{post.created | date: 'fullDate'}}</mat-card-subtitle>
+                <mat-card-content>
+                    <p style="white-space: pre-line">
+                        {{post.body}}
+                    </p>
+                </mat-card-content>
+                <mat-card-actions fxLayoutAlign="space-between center">
+                    <div class="like-container">
+                        <button mat-icon-button class="like-button"
+                            *ngIf="post.authorId != currUser.id && !post.likedUsers.includes(currUser.id)"
+                            (click)="like(post._id)">
+                            <mat-icon>favorite_border</mat-icon>
+                        </button>
+                        <button mat-icon-button class="like-button"
+                            *ngIf="post.authorId != currUser.id && post.likedUsers.includes(currUser.id)"
+                            (click)="dislike(post._id)">
+                            <mat-icon>favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button class="like-button" *ngIf="post.authorId === currUser.id" disabled>
+                            <mat-icon>favorite</mat-icon>
+                        </button>
+                        <span class="like-count">{{post.likeCount}}</span>
+                    </div>
+
+                    <div class="action-buttons" *ngIf="post.authorId === currUser.id">
+                        <a mat-icon-button (click)="onEdit(post._id)">
+                            <mat-icon>edit</mat-icon>
+                        </a>
+                        <a mat-icon-button color="warn" (click)="onDelete(post._id)">
+                            <mat-icon>delete</mat-icon>
+                        </a>
+                    </div>
+                </mat-card-actions>
+            </mat-card>
+            <div>

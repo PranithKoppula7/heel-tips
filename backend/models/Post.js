@@ -7,7 +7,6 @@ const PostSchema = mongoose.Schema({
     authorId: String,
     created: Date,
     likeCount: Number,
-    isLiked: false,
     department: String,
     class: Number,
     likedUsers: Array
